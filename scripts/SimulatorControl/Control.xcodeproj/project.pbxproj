@@ -1,0 +1,24 @@
+// !$*UTF8*$!
+{ archiveVersion = 1; classes = {}; objectVersion = 56; objects = {
+ A00000000000000000000001 = {isa = PBXProject; attributes = {LastUpgradeCheck = 2600; TargetAttributes = {A00000000000000000000010 = {CreatedOnToolsVersion = 26.0;}; A00000000000000000000011 = {CreatedOnToolsVersion = 26.0; TestTargetID = A00000000000000000000010;};};}; buildConfigurationList = A00000000000000000000020; compatibilityVersion = "Xcode 14.0"; developmentRegion = en; knownRegions = (en, Base); mainGroup = A00000000000000000000002; productRefGroup = A00000000000000000000003; projectDirPath = ""; projectRoot = ""; targets = (A00000000000000000000010, A00000000000000000000011);};
+ A00000000000000000000002 = {isa = PBXGroup; children = (A00000000000000000000004, A00000000000000000000005, A00000000000000000000003); sourceTree = "<group>";};
+ A00000000000000000000003 = {isa = PBXGroup; children = (A00000000000000000000006, A00000000000000000000007); name = Products; sourceTree = "<group>";};
+ A00000000000000000000004 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Host.swift; sourceTree = "<group>";};
+ A00000000000000000000005 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlTests.swift; sourceTree = "<group>";};
+ A00000000000000000000006 = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ControlHost.app; sourceTree = BUILT_PRODUCTS_DIR;};
+ A00000000000000000000007 = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ControlTests.xctest; sourceTree = BUILT_PRODUCTS_DIR;};
+ A00000000000000000000008 = {isa = PBXBuildFile; fileRef = A00000000000000000000004;};
+ A00000000000000000000009 = {isa = PBXBuildFile; fileRef = A00000000000000000000005;};
+ A00000000000000000000010 = {isa = PBXNativeTarget; buildConfigurationList = A00000000000000000000021; buildPhases = (A00000000000000000000012); buildRules = (); dependencies = (); name = ControlHost; productName = ControlHost; productReference = A00000000000000000000006; productType = "com.apple.product-type.application";};
+ A00000000000000000000011 = {isa = PBXNativeTarget; buildConfigurationList = A00000000000000000000022; buildPhases = (A00000000000000000000013); buildRules = (); dependencies = (A00000000000000000000014); name = ControlTests; productName = ControlTests; productReference = A00000000000000000000007; productType = "com.apple.product-type.bundle.ui-testing";};
+ A00000000000000000000012 = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A00000000000000000000008); runOnlyForDeploymentPostprocessing = 0;};
+ A00000000000000000000013 = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A00000000000000000000009); runOnlyForDeploymentPostprocessing = 0;};
+ A00000000000000000000014 = {isa = PBXTargetDependency; target = A00000000000000000000010; targetProxy = A00000000000000000000015;};
+ A00000000000000000000015 = {isa = PBXContainerItemProxy; containerPortal = A00000000000000000000001; proxyType = 1; remoteGlobalIDString = A00000000000000000000010; remoteInfo = ControlHost;};
+ A00000000000000000000020 = {isa = XCConfigurationList; buildConfigurations = (A00000000000000000000030); defaultConfigurationIsVisible = 0; defaultConfigurationName = Debug;};
+ A00000000000000000000021 = {isa = XCConfigurationList; buildConfigurations = (A00000000000000000000031); defaultConfigurationIsVisible = 0; defaultConfigurationName = Debug;};
+ A00000000000000000000022 = {isa = XCConfigurationList; buildConfigurations = (A00000000000000000000032); defaultConfigurationIsVisible = 0; defaultConfigurationName = Debug;};
+ A00000000000000000000030 = {isa = XCBuildConfiguration; buildSettings = {SDKROOT = iphonesimulator; IPHONEOS_DEPLOYMENT_TARGET = 17.0; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; CLANG_ENABLE_MODULES = YES;}; name = Debug;};
+ A00000000000000000000031 = {isa = XCBuildConfiguration; buildSettings = {PRODUCT_BUNDLE_IDENTIFIER = dev.ccode.simulator.controlhost; PRODUCT_NAME = "$(TARGET_NAME)"; GENERATE_INFOPLIST_FILE = YES; INFOPLIST_KEY_UILaunchScreen_Generation = YES; CODE_SIGNING_ALLOWED = NO;}; name = Debug;};
+ A00000000000000000000032 = {isa = XCBuildConfiguration; buildSettings = {PRODUCT_BUNDLE_IDENTIFIER = dev.ccode.simulator.controltests; PRODUCT_NAME = "$(TARGET_NAME)"; GENERATE_INFOPLIST_FILE = YES; TEST_TARGET_NAME = ControlHost; CODE_SIGNING_ALLOWED = NO;}; name = Debug;};
+}; rootObject = A00000000000000000000001; }

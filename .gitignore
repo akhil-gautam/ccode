@@ -1,0 +1,7 @@
+.build/
+.swiftpm/
+dist/
+.DS_Store
+*.trace
+__pycache__/
+*.py[cod]
