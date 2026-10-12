@@ -47,7 +47,7 @@ final class NativeTerminalView: TerminalView {
                     let launch = try transport.launch(executable: "/bin/sh", arguments: ["-l", "-i"], directory: directory)
                     executable = launch.executable; arguments = launch.arguments.map { $0 == "-T" ? "-tt" : $0 }; localDirectory = launch.directory
                 } else { executable = "/bin/zsh"; arguments = ["-l", "-i"]; localDirectory = directory }
-                let process = try await Task.detached {
+                let process = try await Task.detached { [weak self] in
                     try PTYSession(executable: executable, arguments: arguments, directory: localDirectory, environment: processEnvironment, onData: { [weak self] data in
                         await self?.receive(data)
                     }, onExit: { [weak self] status in
