@@ -110,10 +110,10 @@ def write_cask(tag, archives, output):
 
   url "https://github.com/akhil-gautam/ccode/releases/download/v#{{version}}/ccode-#{{version}}-macos-#{{arch}}.zip"
   name "ccode"
-  desc "Native macOS workspace for ACP coding agents"
+  desc "Native workspace for ACP coding agents"
   homepage "https://github.com/akhil-gautam/ccode"
 
-  depends_on macos: ">= :sonoma"
+  depends_on macos: :sonoma
   depends_on formula: "node"
 
   app "ccode.app"

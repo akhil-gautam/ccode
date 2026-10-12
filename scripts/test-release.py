@@ -55,6 +55,7 @@ class ReleaseTests(unittest.TestCase):
         self.assertIn('version "0.1.0"', text)
         self.assertIn('/releases/download/v#{version}/ccode-#{version}-macos-#{arch}.zip', text)
         self.assertIn('app "ccode.app"', text)
+        self.assertIn('depends_on macos: :sonoma', text)
         self.assertNotIn("no_check", text)
 
     def test_missing_or_invalid_archive_preserves_existing_cask(self):
