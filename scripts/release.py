@@ -101,7 +101,9 @@ def write_cask(tag, archives, output):
             raise ValueError("Existing cask has no recognized version")
         if tuple(map(int, current.group(1).split("."))) > tuple(map(int, version.split("."))):
             raise ValueError("An older release cannot downgrade the Homebrew cask")
-    text = f'''cask "ccode" do
+    text = f'''# frozen_string_literal: true
+
+cask "ccode" do
   arch arm: "arm64", intel: "x86_64"
 
   version "{version}"
@@ -113,8 +115,8 @@ def write_cask(tag, archives, output):
   desc "Native workspace for ACP coding agents"
   homepage "https://github.com/akhil-gautam/ccode"
 
-  depends_on macos: :sonoma
   depends_on formula: "node"
+  depends_on macos: :sonoma
 
   app "ccode.app"
 end
