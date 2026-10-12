@@ -7,8 +7,8 @@ This repository doubles as the Homebrew tap. Users must supply its URL when tapp
 After CI passes on `main`, tag the desired commit and push the tag:
 
 ```sh
-git tag v0.1.0
-git push origin v0.1.0
+git tag v0.1.1
+git push origin v0.1.1
 ```
 
 Tags must be `vMAJOR.MINOR.PATCH`, without suffixes or leading zeroes. The release workflow uses native macOS runners and Xcode 26.3 to test and build separate Apple Silicon and Intel apps. Each archive contains versioned release metadata, bundled helper scripts and third-party notices. The executable's architecture and signature are checked before uploading.
@@ -25,13 +25,13 @@ Current builds are ad hoc signed and are not notarized. Gatekeeper remains enabl
 
 ```sh
 python3 scripts/test-release.py
-python3 scripts/release.py build v0.1.0 arm64
+python3 scripts/release.py build v0.1.1 arm64
 ```
 
 Use `x86_64` on an Intel Mac. After downloading both release ZIPs into `dist`, regenerate and validate the cask with:
 
 ```sh
-python3 scripts/release.py cask v0.1.0 dist Casks/ccode.rb
+python3 scripts/release.py cask v0.1.1 dist Casks/ccode.rb
 ```
 
 Homebrew upgrades preserve chats and settings. The cask has no destructive `zap` stanza.

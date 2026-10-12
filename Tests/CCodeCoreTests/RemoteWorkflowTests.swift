@@ -240,7 +240,10 @@ final class RemoteWorkflowTests: XCTestCase, @unchecked Sendable {
         for _ in 0..<300 where !terminal.ready && !terminal.ended { try await Task.sleep(for: .milliseconds(10)) }
         XCTAssertTrue(terminal.ready, terminal.failure ?? "SSH terminal did not become ready")
         terminal.send(source: terminal.view, data: Array("/bin/pwd > encrypted-pty-cwd.txt\r".utf8)[...])
-        for _ in 0..<400 where !FileManager.default.fileExists(atPath: root.appendingPathComponent("encrypted-pty-cwd.txt").path) { try await Task.sleep(for: .milliseconds(10)) }
+        for _ in 0..<400 {
+            if (try? String(contentsOf: root.appendingPathComponent("encrypted-pty-cwd.txt"), encoding: .utf8))?.trimmingCharacters(in: .newlines) == root.path { break }
+            try await Task.sleep(for: .milliseconds(10))
+        }
         XCTAssertEqual(try String(contentsOf: root.appendingPathComponent("encrypted-pty-cwd.txt"), encoding: .utf8).trimmingCharacters(in: .newlines), root.path)
         await terminal.close(); chat.terminalTabs.removeAll()
         await store.shutdown()
@@ -418,7 +421,11 @@ print(json.dumps(r))
         for _ in 0..<300 where !tab.ready && !tab.ended { try await Task.sleep(for: .milliseconds(10)) }
         XCTAssertTrue(tab.ready, tab.failure ?? "Remote PTY did not start")
         tab.send(source: tab.view, data: Array("printf 'REMOTE_PTY_READY\\n'; pwd > ccode-pty-cwd-proof.txt\r".utf8)[...])
-        for _ in 0..<300 { if FileManager.default.fileExists(atPath: root.path + "/ccode-pty-cwd-proof.txt") { break }; try await Task.sleep(for: .milliseconds(10)) }
+        for _ in 0..<300 {
+            if (try? String(contentsOfFile: root.path + "/ccode-pty-cwd-proof.txt", encoding: .utf8))?.trimmingCharacters(in: .newlines) == root.path,
+               String(describing: tab.view.accessibilityValue()).contains("REMOTE_PTY_READY") { break }
+            try await Task.sleep(for: .milliseconds(10))
+        }
         XCTAssertEqual(try String(contentsOfFile: root.path + "/ccode-pty-cwd-proof.txt", encoding: .utf8).trimmingCharacters(in: .newlines), root.path)
         XCTAssertTrue(String(describing: tab.view.accessibilityValue()).contains("REMOTE_PTY_READY"), String(describing: tab.view.accessibilityValue()))
         await tab.close(); chat.terminalTabs.removeAll()
