@@ -55,18 +55,18 @@ public actor ACPConnection {
                 while true {
                     let data = try readPipe(out, untilExit: child, remainingAfterExit: &remainingAfterExit)
                     if data.isEmpty { break }
-                    Task { await self?.receive(data); bridge.signal() }
+                    Task { [weak self] in await self?.receive(data); bridge.signal() }
                     bridge.wait()
                 }
-                Task { await self?.eof() }
-            } catch { Task { await self?.end("Agent output closed: \(error.localizedDescription)") } }
+                Task { [weak self] in await self?.eof() }
+            } catch { Task { [weak self] in await self?.end("Agent output closed: \(error.localizedDescription)") } }
             try? out.close()
         }
         DispatchQueue(label: "ccode.acp.stderr.\(child.processIdentifier)").async { [weak self] in
             let bridge = DispatchSemaphore(value: 0)
             var remainingAfterExit: Int?
             while let data = try? readPipe(err, untilExit: child, remainingAfterExit: &remainingAfterExit), !data.isEmpty {
-                Task { await self?.log(data); bridge.signal() }
+                Task { [weak self] in await self?.log(data); bridge.signal() }
                 bridge.wait()
             }
             try? err.close()

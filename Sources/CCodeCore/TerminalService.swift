@@ -57,10 +57,10 @@ public actor TerminalService {
                 let bridge = DispatchSemaphore(value: 0)
                 var remainingAfterExit: Int?
                 while let data = try? readPipe(handle, untilExit: child, remainingAfterExit: &remainingAfterExit), !data.isEmpty {
-                    Task { await self?.append(data, id: id, standardError: standardError); bridge.signal() }
+                    Task { [weak self] in await self?.append(data, id: id, standardError: standardError); bridge.signal() }
                     bridge.wait()
                 }
-                Task { await self?.markDrained(id) }
+                Task { [weak self] in await self?.markDrained(id) }
                 try? handle.close()
             }
         }
